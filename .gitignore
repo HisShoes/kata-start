@@ -1,0 +1,16 @@
+.DS_Store
+.aws
+.aws-sam
+.events/
+.terraform/
+infra/terraform/.terraform/
+node_modules/
+packaged
+src/.build
+dist/
+junit.xml
+reports
+.scannerwork
+.idea
+.vscode
+src/.webpackCache
