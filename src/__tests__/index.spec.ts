@@ -1,4 +1,5 @@
 import { chop } from '..';
+import { testData } from '../../binary-search-test-data';
 
 describe('chop', () => {
   it.each`
@@ -12,5 +13,10 @@ describe('chop', () => {
     ${170}   | ${[10, 20, 80, 30, 60, 50, 110, 100, 130]} | ${-1}
   `('finds $target in $array at index $result', ({ target, array, result }) => {
     expect(chop(target, array)).toBe(result);
+  });
+});
+describe.only('chop', () => {
+  it.each(testData)('finds $target in $array at index $result', ({ target, array, index }) => {
+    expect(chop(target, array)).toBe(index);
   });
 });
