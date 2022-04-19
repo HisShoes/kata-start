@@ -130,10 +130,11 @@ export const createOrderProcessors = (context: Context) => {
     withUpdateMembershipStatus,
   } = createOrderWrappers(context);
 
-  const membershipLevelUpdate = (order) => payment(withMembershipUpgradeEmail(withUpdateMembershipStatus(order)));
-  const membershipCreation = (order) => payment(withMembershipJoiningEmail(withCreateMembership(order)));
-  const physicalProductOrder = (order) => payment(withSendPackingSlips(order));
-  const bookOrder = (order) => physicalProductOrder(withRoyaltyPackingSlip(order));
+  const membershipLevelUpdate: OrderWrapper = (order) =>
+    payment(withMembershipUpgradeEmail(withUpdateMembershipStatus(order)));
+  const membershipCreation: OrderWrapper = (order) => payment(withMembershipJoiningEmail(withCreateMembership(order)));
+  const physicalProductOrder: OrderWrapper = (order) => payment(withSendPackingSlips(order));
+  const bookOrder: OrderWrapper = (order) => physicalProductOrder(withRoyaltyPackingSlip(order));
 
   return {
     basicPayment: payment,
@@ -142,4 +143,34 @@ export const createOrderProcessors = (context: Context) => {
     membershipCreation,
     physicalProductOrder,
   };
+};
+
+// dummy handler
+
+const mockContext: Context = {
+  chargeCustomer: (order) => {
+    console.log(`chargeCustomer ${order}`);
+    return order;
+  },
+  createMembership: (order) => {
+    console.log(`createMembership ${order}`);
+    return order;
+  },
+  sendEmail: (order) => {
+    console.log(`sendEmail ${order}`);
+    return order;
+  },
+  sendPackingSlip: (order) => {
+    console.log(`sendPackingSlip ${order}`);
+    return 'packing slip ID';
+  },
+  updateMembershipStatus: (order) => {
+    console.log(`updateMembershipStatus ${order}`);
+    return order;
+  },
+};
+
+export const handler = ({ orderType, order }: { orderType: string; order: Order }) => {
+  const orderProcessors = createOrderProcessors(mockContext);
+  orderProcessors[orderType](order);
 };
