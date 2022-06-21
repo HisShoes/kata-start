@@ -16,6 +16,7 @@ export const splitStringToThrees = (str: string) => {
   return x;
 }
 
+
 export const parseNumber = (file: string) => {
   //[
   //"    _ "
@@ -41,8 +42,27 @@ export const parseNumber = (file: string) => {
     const one = [lines[0][0], lines[1][0], lines[2][0]].join('\n');
     const two = [lines[0][1], lines[1][1], lines[2][1]].join('\n');
 
-    return parseInt(`${maps[one]}${maps[two]}`)
+    return parseInt(`${maps[one]}${maps[two]}`);
 }
+
+// const tree = {
+//   '   ': {
+//     '  |': {
+//       '  |': 1
+//     },
+//     '|_|': 4, 
+//   },
+//   ' _ ': {
+//   }
+// }
+
+export const getLeaves = (str: string) => {
+    // this should return the remaining tree not the next leaf
+    const tree = {
+        [`   `]:[`  |`],
+    }
+    return tree[str]
+} 
 
 // export const parseLine = (file: string) => {}
 
@@ -63,15 +83,3 @@ export const parseNumber = (file: string) => {
 //   [' |']
 // ]
 // .join('\n')
-
-// const map = {
-//   '   ': {
-//     '  |': {
-//       '  |': 1
-//     },
-//     '|_|': 4, 
-//   },
-//   ' _ ': {
-
-//   }
-// }

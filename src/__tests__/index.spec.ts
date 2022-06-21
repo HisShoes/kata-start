@@ -1,10 +1,16 @@
-import { parseNumber,  splitStringToThrees } from '..';
+import { getLeaves, parseNumber,  splitStringToThrees } from '..';
 
 // expect(parseNumber(1, 1)).toBe(2);
 
 describe('splitStringToThrees', () => {
   it('splits the string into threes', () => {
     expect(splitStringToThrees(`    _ `)).toEqual(['   ', ' _ '])
+  })
+})
+
+describe('tree tests', ()=>{
+  it('should return leaves', () => {
+    expect(getLeaves('   ')).toEqual(['  |'])
   })
 })
 
