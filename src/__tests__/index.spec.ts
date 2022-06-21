@@ -1,7 +1,12 @@
-import { sum } from '..';
+import { parseNumber } from '..';
 
-describe('sum', () => {
-  it('1 + 1 = 2', () => {
-    expect(sum(1, 1)).toBe(2);
+// expect(parseNumber(1, 1)).toBe(2);
+
+describe('parseNumber', () => {
+  it('parses the number 1', () => {
+   expect (parseNumber(`   
+  |
+  |`
+    )).toBe(1);
   });
 });
